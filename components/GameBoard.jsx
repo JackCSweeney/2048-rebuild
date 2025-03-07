@@ -117,10 +117,10 @@ const GameBoard = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       switch(e.key) {
-        case 'ArrowUp': move(0); break;
-        case 'ArrowRight': move(1); break;
-        case 'ArrowDown': move(2); break;
-        case 'ArrowLeft': move(3); break;
+        case 'ArrowUp': move(3); break;
+        case 'ArrowRight': move(2); break;
+        case 'ArrowDown': move(1); break;
+        case 'ArrowLeft': move(0); break;
         default: return;
       }
     }
@@ -151,7 +151,7 @@ const GameBoard = () => {
   }
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="mb-4 text-2xl font-bold">Score: {score}</div>
+      <div className="mb-4 text-black font-bold">Score: {score}</div>
       
       <div className="bg-gray-300 p-4 rounded-lg">
         <div className="grid grid-cols-4 gap-2">
