@@ -114,6 +114,21 @@ const GameBoard = () => {
     return false
   }
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      switch(e.key) {
+        case 'ArrowUp': move(0); break;
+        case 'ArrowRight': move(1); break;
+        case 'ArrowDown': move(2); break;
+        case 'ArrowLeft': move(3); break;
+        default: return;
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeydown)
+  }, [board, gameOver, won])
+
+  
   return (
     <div>
       <div className='bg-gray-300 p-4 rounded-lg'>
