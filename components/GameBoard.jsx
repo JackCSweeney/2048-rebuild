@@ -98,6 +98,22 @@ const GameBoard = () => {
     return rotated
   }
 
+  const canMove = (currentBoard) => {
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        if (currentBoard[i][j] === 0) return true
+      }
+    }
+
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        const current = currentBoard[i][j];
+        if ((i<3 && current === currentBoard[i+1][j]) || (j<3 && current === currentBoard[i][j+1])) { return true }
+      }
+    }
+    return false
+  }
+
   return (
     <div>
       <div className='bg-gray-300 p-4 rounded-lg'>
