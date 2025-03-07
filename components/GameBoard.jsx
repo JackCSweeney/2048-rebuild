@@ -128,6 +128,24 @@ const GameBoard = () => {
     return () => window.removeEventListener('keydown', handleKeydown)
   }, [board, gameOver, won])
 
+  const getTileColor = (value) => {
+    const colors = {
+      0: 'bg-gray-200',
+      2: 'bg-gray-100',
+      4: 'bg-yellow-100',
+      8: 'bg-orange-200',
+      16: 'bg-orange-300',
+      32: 'bg-red-300',
+      64: 'bg-red-400',
+      128: 'bg-yellow-300',
+      256: 'bg-yellow-400',
+      512: 'bg-yellow-500',
+      1024: 'bg-yellow-600',
+      2048: 'bg-yellow-700'
+    }
+    return colors[value] || 'bg-yellow-800'
+  }
+
   
   return (
     <div>
