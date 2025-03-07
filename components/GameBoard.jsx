@@ -33,7 +33,7 @@ const GameBoard = () => {
     }
 
     if (emptyTiles.length > 0) {
-      const { x, y } = emptyTiles[Math.floor(Math.random() * emptyTiles.Length)]
+      const { x, y } = emptyTiles[Math.floor(Math.random() * emptyTiles.length)]
       currentBoard[x][y] = Math.random() < 0.9 ? 2 : 4
     }
     return currentBoard
@@ -41,7 +41,7 @@ const GameBoard = () => {
 
   const move = (direction) => {
     if (gameOver || won) return
-    let newBoard = JSON.parst(JSON.stringify(board))
+    let newBoard = JSON.parse(JSON.stringify(board))
     let moved = false
     let newScore = score
 
@@ -125,7 +125,7 @@ const GameBoard = () => {
       }
     }
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeydown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
   }, [board, gameOver, won])
 
   const getTileColor = (value) => {
@@ -146,21 +146,36 @@ const GameBoard = () => {
     return colors[value] || 'bg-yellow-800'
   }
 
-  
+  const getTextColor = (value) => {
+    return value <= 4 ? 'text-gray-700' : 'text-white'
+  }
   return (
-    <div>
-      <div className='bg-gray-300 p-4 rounded-lg'>
-        <div className='grid grid-cols-4 gap-2'>
-          {board.map((row, i) =>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="mb-4 text-2xl font-bold">Score: {score}</div>
+      
+      <div className="bg-gray-300 p-4 rounded-lg">
+        <div className="grid grid-cols-4 gap-2">
+          {board.map((row, i) => 
             row.map((cell, j) => (
-              <div key={`${i}-${j}`} className='w-16 h-16 flex items-center justify-center font-bold text-xl rounded'>
+              <div
+                key={`${i}- ${j}`}
+                className={`w-16 h-16 flex items-center justify-center font-bold text-xl rounded ${getTileColor(cell)} ${getTextColor(cell)}`}
+              >
                 {cell !== 0 && cell}
               </div>
-          )))}
+            ))
+          )}
         </div>
       </div>
-      <button onClick={initializeBoard}>
+      <button 
+        onClick={initializeBoard}
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        New Game
       </button>
+      <div className="mt-4 text-sm text-gray-600">
+        Use arrow keys to move tiles
+      </div>
     </div>
   )
 }
